@@ -1,0 +1,29 @@
+{
+  "name": "greenapi-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darkhanzhursin/greenapi-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/darkhanzhursin/greenapi-test/issues"
+  },
+  "homepage": "https://github.com/darkhanzhursin/greenapi-test#readme",
+  "dependencies": {
+    "@green-api/whatsapp-api-client": "^0.3.39",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

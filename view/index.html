@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GREEN-API</title>
+  <!-- <script src="./util/handlers.js"></script> -->
+</head>
+<body>
+  <h1>API Request Example</h1>
+  <form>
+    <label for="idInstance">Id Instance:</label><br>
+    <input required type="text" id="idInstance" name="idInstance"><br>
+    <label for="apiTokenInstance">API Token:</label><br>
+    <input required type="text" id="apiTokenInstance" name="apiTokenInstance"><br>
+  </form>
+  <button id="requestSettings">getSettings</button>
+  <button id="requestInstance">getInstanceSettings</button>
+
+  <form>
+    <label for="phoneNumber">Phone Number:</label><br>
+    <input required type="tel" id="phoneNumber" name="phoneNumber" value=""><br>
+    <label for="messageText">Message:</label><br>
+    <input required type="text" id="messageText" name="messageText" value="Hello world!"><br>
+  </form>
+  <button id="requestMessage">sendMessage</button>
+
+  <form>
+    <label for="phoneNumber">Phone Number:</label><br>
+    <input required type="tel" id="phoneNumber2" name="phoneNumber2" value=""><br>
+    <label for="fileUrl">File url:</label><br>
+    <input required type="text" id="fileUrl" name="fileUrl" value="https://avatars.mds.yandex.net/get-pdb/477388/77f64197-87d2-42cf-9305-14f49c65f1da/s375"><br>
+  </form>
+  <button id="requestUrl">sendFileByUrl</button>
+  <div id="response"></div>
+  <script>
+    
+    document.getElementById("requestSettings").addEventListener("click", async (event) => { 
+      event.preventDefault();
+      const idInstance = document.getElementById('idInstance').value;
+      const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+      fetch("/api/settings", {
+        method: 'POST',
+        body: JSON.stringify({
+          idInstance: idInstance,
+          apiTokenInstance: apiTokenInstance
+        }),
+        headers: {'Content-Type': 'application/json',
+                        'Accept': 'application/json'},
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("response").innerText = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) => {
+          document.getElementById("response").innerText = "Error making request";
+        });
+    });
+
+    document.getElementById("requestInstance").addEventListener("click", (e) => {
+      e.preventDefault();
+      const idInstance = document.getElementById('idInstance').value;
+      const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+      fetch("/api/instance", {
+        method: 'POST',
+        body: JSON.stringify({
+          idInstance: idInstance,
+          apiTokenInstance: apiTokenInstance
+        }),
+        headers: {'Content-Type': 'application/json',
+                        'Accept': 'application/json'},
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("response").innerText = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) => {
+          document.getElementById("response").innerText = "Error making request";
+        });
+    });
+
+    document.getElementById("requestMessage").addEventListener("click", (e) => {
+      e.preventDefault();
+      const idInstance = document.getElementById('idInstance').value;
+      const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+      const phone = document.getElementById('phoneNumber').value;
+      const message = document.getElementById('messageText').value;
+      fetch("/api/msg", {
+        method: 'POST',
+        body: JSON.stringify({
+          idInstance: idInstance,
+          apiTokenInstance: apiTokenInstance,
+          phone: phone,
+          message: message
+        }),
+        headers: {'Content-Type': 'application/json',
+                        'Accept': 'application/json'},
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("response").innerText = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) => {
+          document.getElementById("response").innerText = "Error making request";
+        });
+    });
+
+    document.getElementById("requestUrl").addEventListener("click", (e) => {
+      e.preventDefault();
+      const idInstance = document.getElementById('idInstance').value;
+      const apiTokenInstance = document.getElementById('apiTokenInstance').value;
+      const phone = document.getElementById('phoneNumber2').value;
+      const fileUrl = document.getElementById('fileUrl').value;
+      fetch("/api/file", {
+        method: 'POST',
+        body: JSON.stringify({
+          idInstance: idInstance,
+          apiTokenInstance: apiTokenInstance,
+          phone: phone,
+          fileUrl: fileUrl
+        }),
+        headers: {'Content-Type': 'application/json',
+                        'Accept': 'application/json'},
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("response").innerText = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        })
+        .catch((error) => {
+          document.getElementById("response").innerText = "Error making request";
+        });
+    });
+  </script>
+
+</body>
+</html>
